@@ -1,0 +1,6 @@
+
+# Initial crawler seed URLs
+https://en.wikipedia.org/wiki/Computer_science
+https://docs.oracle.com/en/java/javase/21/
+https://spring.io/projects/spring-boot
+https://news.ycombinator.com/
