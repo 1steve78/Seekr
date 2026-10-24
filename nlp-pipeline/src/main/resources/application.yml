@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: nlp-pipeline
+  config:
+    import: classpath:search-engine-common.yml
+server:
+  port: ${SERVER_PORT:8084}

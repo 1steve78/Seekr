@@ -1,0 +1,40 @@
+logging:
+  structured:
+    format:
+      console: logstash
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: never
+  metrics:
+    tags:
+      application: ${spring.application.name}
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+logging:
+  level:
+    com.searchengine: DEBUG
+management:
+  endpoint:
+    health:
+      show-details: always
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+logging:
+  level:
+    root: INFO
+    com.searchengine: INFO
+management:
+  endpoint:
+    health:
+      show-details: never
