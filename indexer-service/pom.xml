@@ -14,9 +14,22 @@
     <name>indexer-service</name>
 
     <dependencies>
+        <!-- Solr Java Client -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+        </dependency>
+
+        <!-- Spring Kafka: KafkaListener -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.searchengine</groupId>
             <artifactId>common</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

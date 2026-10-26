@@ -3,5 +3,11 @@ spring:
     name: indexer-service
   config:
     import: classpath:search-engine-common.yml
+  kafka:
+    listener:
+      type: batch
 server:
   port: ${SERVER_PORT:8082}
+solr:
+  url: ${SOLR_URL:http://localhost:8983/solr}
+  collection: ${SOLR_COLLECTION:documents}
