@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Search Engine</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 780px; margin: 2rem auto; padding: 0 1rem; color: #1f2937; }
+        form { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        input[type="text"] { flex: 1; padding: 0.75rem 1rem; font-size: 1rem; border: 1px solid #d1d5db; border-radius: 8px; }
+        button { padding: 0.75rem 1.5rem; font-size: 1rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+        .meta { color: #6b7280; font-size: 0.875rem; margin-bottom: 1.5rem; }
+        .result { margin-bottom: 1.75rem; }
+        .result-url { font-size: 0.825rem; color: #059669; word-break: break-all; }
+        .result-title { font-size: 1.2rem; margin: 0.2rem 0; }
+        .result-title a { color: #1d4ed8; text-decoration: none; }
+        .result-title a:hover { text-decoration: underline; }
+        .result-snippet { font-size: 0.95rem; line-height: 1.5; color: #4b5563; }
+        mark { background: #fef08a; padding: 0 2px; border-radius: 2px; font-weight: 600; }
+        .pagination { display: flex; gap: 1rem; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <form action="/" method="get">
+        <input type="text" name="q" th:value="${res.query()}" placeholder="Search the web..." autofocus />
+        <button type="submit">Search</button>
+    </form>
+
+    <div th:if="${!res.query().isEmpty()}">
+        <div class="meta">
+            Found <strong th:text="${res.totalHits()}">0</strong> results in
+            <strong th:text="${res.queryTimeMs()}">0</strong> ms
+        </div>
+
+        <div class="result" th:each="item : ${res.results()}">
+            <div class="result-url" th:text="${item.url()}"></div>
+            <h3 class="result-title">
+                <a th:href="${item.url()}" th:text="${item.title()}" target="_blank"></a>
+            </h3>
+            <div class="result-snippet" th:utext="${item.snippet()}"></div>
+        </div>
+
+        <div class="pagination" th:if="${res.totalHits() > 10}">
+            <a th:if="${res.page() > 0}" th:href="@{/(q=${res.query()}, page=${res.page() - 1})}">&larr; Previous</a>
+            <a th:if="${(res.page() + 1) * res.pageSize() < res.totalHits()}"
+               th:href="@{/(q=${res.query()}, page=${res.page() + 1})}">Next &rarr;</a>
+        </div>
+    </div>
+</body>
+</html>

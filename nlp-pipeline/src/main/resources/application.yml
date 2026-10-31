@@ -3,5 +3,9 @@ spring:
     name: nlp-pipeline
   config:
     import: classpath:search-engine-common.yml
+  kafka:
+    consumer:
+      properties:
+        spring.json.value.default.type: com.searchengine.common.model.CrawledPage
 server:
   port: ${SERVER_PORT:8084}

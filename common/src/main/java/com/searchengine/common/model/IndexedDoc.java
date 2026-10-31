@@ -12,5 +12,6 @@ public record IndexedDoc(
         List<String> entities,
         double pagerank,
         List<Float> vector,
-        Instant crawlDate) {
+        Instant crawlDate,
+        String contentHash) {
 }
